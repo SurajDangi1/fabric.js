@@ -1,18 +1,17 @@
 
-document.getElementById('download-btn').addEventListener('click', downloadCanvas);
+var canvas = new fabric.Canvas('tcanvas');
 
-function downloadCanvas() {
-  // Get the canvas element
-  var canvas = document.getElementById('drawingArea');
+fabric.Image.fromURL('https://via.placeholder.com/350x150', function(img){
+	img.setWidth(200);
+	img.setHeight(200);
+	canvas.add(img);
+}); 
 
-  // Create a temporary download link
-  var link = document.createElement('a');
-  link.download = 'canvas.png';
-  link.href = canvas.toDataURL("image/png");
-
-  // Click the link to download the image
-  link.click();
-}
+$("#b").click(function(){
+	$("#tcanvas").get(0).toBlob(function(blob){
+		saveAs(blob, "myIMG.png");
+	});
+}); 
 
 // Define the area of the page to capture
 // const areaToCapture = document.getElementById('drawingArea');
